@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 54;
+	objectVersion = 50;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -92,7 +92,7 @@
 				FF0000000000000000000039 /* Info.plist */,
 				FF0000000000000000000012 /* Preview Content */,
 			);
-			path = .;
+			path = AR3DScan;
 			sourceTree = "<group>";
 		};
 		FF0000000000000000000012 /* Preview Content */ = {
@@ -183,7 +183,7 @@
 				};
 			};
 			buildConfigurationList = FF0000000000000000000018 /* Build configuration list for PBXProject "AR3DScan" */;
-			compatibilityVersion = "Xcode 15.0";
+			compatibilityVersion = "Xcode 13.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -369,7 +369,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Info.plist;
+				INFOPLIST_FILE = AR3DScan/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "L'application a besoin d'accéder à la caméra pour capturer des objets en 3D";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "L'application a besoin d'accéder à la photothèque pour importer des images";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -401,7 +401,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Info.plist;
+				INFOPLIST_FILE = AR3DScan/Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "L'application a besoin d'accéder à la caméra pour capturer des objets en 3D";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "L'application a besoin d'accéder à la photothèque pour importer des images";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
