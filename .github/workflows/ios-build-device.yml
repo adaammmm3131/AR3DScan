@@ -19,7 +19,6 @@ jobs:
       
       - name: Build for iOS Device
         run: |
-          cd AR3DScan/AR3DScan
           mkdir -p build
           
           # Build pour un vrai iPhone (pas simulateur)
@@ -36,7 +35,6 @@ jobs:
       - name: Create IPA file
         if: success()
         run: |
-          cd AR3DScan/AR3DScan
           
           # Chercher le .app compilé
           APP_PATH=""
@@ -70,7 +68,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: ios-device-build
-          path: AR3DScan/AR3DScan/artifacts/AR3DScan.ipa
+          path: artifacts/AR3DScan.ipa
           if-no-files-found: error
           retention-days: 30
 
