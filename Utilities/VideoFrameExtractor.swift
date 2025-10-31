@@ -14,33 +14,36 @@ class VideoFrameExtractor {
         imageGenerator.requestedTimeToleranceAfter = .zero
         imageGenerator.requestedTimeToleranceBefore = .zero
         
-        guard let duration = try? asset.load(.duration) else {
-            completion([])
-            return
-        }
-        
-        let durationSeconds = CMTimeGetSeconds(duration)
-        let totalFrames = Int(durationSeconds * framesPerSecond)
-        var images: [UIImage] = []
-        let group = DispatchGroup()
-        
-        for i in 0..<totalFrames {
-            let time = CMTime(seconds: Double(i) / framesPerSecond, preferredTimescale: 600)
-            
-            group.enter()
-            imageGenerator.generateCGImagesAsynchronously(forTimes: [NSValue(time: time)]) { _, cgImage, _, result, error in
-                defer { group.leave() }
+        // Charger la durée de manière asynchrone
+        Task {
+            do {
+                let duration = try await asset.load(.duration)
+                let durationSeconds = CMTimeGetSeconds(duration)
+                let totalFrames = Int(durationSeconds * framesPerSecond)
+                var images: [UIImage] = []
+                let group = DispatchGroup()
                 
-                if let cgImage = cgImage {
-                    let uiImage = UIImage(cgImage: cgImage)
-                    images.append(uiImage)
+                for i in 0..<totalFrames {
+                    let time = CMTime(seconds: Double(i) / framesPerSecond, preferredTimescale: 600)
+                    
+                    group.enter()
+                    imageGenerator.generateCGImagesAsynchronously(forTimes: [NSValue(time: time)]) { _, cgImage, _, result, error in
+                        defer { group.leave() }
+                        
+                        if let cgImage = cgImage {
+                            let uiImage = UIImage(cgImage: cgImage)
+                            images.append(uiImage)
+                        }
+                    }
                 }
+                
+                group.notify(queue: .main) {
+                    // Trier les images par ordre temporel
+                    completion(images)
+                }
+            } catch {
+                completion([])
             }
-        }
-        
-        group.notify(queue: .main) {
-            // Trier les images par ordre temporel
-            completion(images)
         }
     }
     

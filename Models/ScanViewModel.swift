@@ -80,7 +80,7 @@ class ScanViewModel: ObservableObject {
                 let images = try await extractFrames(from: videoURL)
                 
                 // Traiter comme des images
-                try await processImages(images) { result in
+                processImages(images) { result in
                     completion(result)
                 }
                 
