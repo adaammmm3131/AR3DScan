@@ -35,27 +35,13 @@ jobs:
       
       - name: Build project
         run: |
-          if [ -f "AR3DScan.xcodeproj/project.pbxproj" ]; then
-            xcodebuild -project AR3DScan.xcodeproj \
-              -scheme AR3DScan \
-              -destination 'platform=iOS Simulator,name=iPhone 16 Pro' \
-              -sdk iphonesimulator \
-              clean build \
-              CODE_SIGN_IDENTITY="" \
-              CODE_SIGNING_REQUIRED=NO
-          elif [ -f "AR3DScan/AR3DScan.xcodeproj/project.pbxproj" ]; then
-            xcodebuild -project AR3DScan/AR3DScan.xcodeproj \
-              -scheme AR3DScan \
-              -destination 'platform=iOS Simulator,name=iPhone 16 Pro' \
-              -sdk iphonesimulator \
-              clean build \
-              CODE_SIGN_IDENTITY="" \
-              CODE_SIGNING_REQUIRED=NO
-          else
-            echo "Error: Could not find .xcodeproj file"
-            find . -name "*.xcodeproj" -type d
-            exit 1
-          fi
+          xcodebuild -project AR3DScan.xcodeproj \
+            -scheme AR3DScan \
+            -destination 'platform=iOS Simulator,name=iPhone 16 Pro' \
+            -sdk iphonesimulator \
+            clean build \
+            CODE_SIGN_IDENTITY="" \
+            CODE_SIGNING_REQUIRED=NO
       
       - name: Archive build artifacts
         if: success()
