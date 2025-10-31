@@ -37,7 +37,7 @@ jobs:
         run: |
           xcodebuild -project AR3DScan.xcodeproj \
             -scheme AR3DScan \
-            -destination 'platform=iOS Simulator,name=iPhone 15 Pro' \
+            -destination 'platform=iOS Simulator,name=iPhone 16 Pro' \
             -sdk iphonesimulator \
             clean build \
             CODE_SIGN_IDENTITY="" \
