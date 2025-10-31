@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 56;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -26,7 +26,6 @@
 		FF0000000000000000000032 /* CameraManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0000000000000000000033 /* CameraManager.swift */; };
 		FF0000000000000000000034 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0000000000000000000035 /* Extensions.swift */; };
 		FF0000000000000000000036 /* VideoFrameExtractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0000000000000000000037 /* VideoFrameExtractor.swift */; };
-		FF0000000000000000000038 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FF0000000000000000000039 /* Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -92,7 +91,7 @@
 				FF0000000000000000000039 /* Info.plist */,
 				FF0000000000000000000012 /* Preview Content */,
 			);
-			path = AR3DScan;
+			path = .;
 			sourceTree = "<group>";
 		};
 		FF0000000000000000000012 /* Preview Content */ = {
@@ -183,7 +182,7 @@
 				};
 			};
 			buildConfigurationList = FF0000000000000000000018 /* Build configuration list for PBXProject "AR3DScan" */;
-			compatibilityVersion = "Xcode 13.0";
+			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -207,7 +206,6 @@
 			files = (
 				FF0000000000000000000007 /* Preview Assets.xcassets in Resources */,
 				FF0000000000000000000005 /* Assets.xcassets in Resources */,
-				FF0000000000000000000038 /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -241,7 +239,7 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
-		FF0000000000000000000019 /* Debug */ = {
+		FF000000000000000000003A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -304,7 +302,7 @@
 			};
 			name = Debug;
 		};
-		FF000000000000000000001A /* Release */ = {
+		FF000000000000000000003B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -360,7 +358,7 @@
 			};
 			name = Release;
 		};
-		FF000000000000000000001B /* Debug */ = {
+		FF000000000000000000003C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -369,7 +367,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = AR3DScan/Info.plist;
+				INFOPLIST_FILE = Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "L'application a besoin d'accéder à la caméra pour capturer des objets en 3D";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "L'application a besoin d'accéder à la photothèque pour importer des images";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -392,7 +390,7 @@
 			};
 			name = Debug;
 		};
-		FF000000000000000000001C /* Release */ = {
+		FF000000000000000000003D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -401,7 +399,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = AR3DScan/Info.plist;
+				INFOPLIST_FILE = Info.plist;
 				INFOPLIST_KEY_NSCameraUsageDescription = "L'application a besoin d'accéder à la caméra pour capturer des objets en 3D";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "L'application a besoin d'accéder à la photothèque pour importer des images";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -430,8 +428,8 @@
 		FF0000000000000000000018 /* Build configuration list for PBXProject "AR3DScan" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				FF0000000000000000000019 /* Debug */,
-				FF000000000000000000001A /* Release */,
+				FF000000000000000000003A /* Debug */,
+				FF000000000000000000003B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -439,8 +437,8 @@
 		FF0000000000000000000014 /* Build configuration list for PBXNativeTarget "AR3DScan" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				FF000000000000000000001B /* Debug */,
-				FF000000000000000000001C /* Release */,
+				FF000000000000000000003C /* Debug */,
+				FF000000000000000000003D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
