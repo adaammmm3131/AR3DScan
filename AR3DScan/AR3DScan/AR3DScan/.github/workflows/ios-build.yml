@@ -1,0 +1,78 @@
+﻿name: Build iOS App
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Build AR3DScan iOS App
+    runs-on: macos-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Setup Xcode
+        uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: 'latest-stable'
+      
+      - name: Show Xcode version
+        run: xcodebuild -version
+      
+      - name: List available simulators
+        run: xcrun simctl list devices available | head -20
+      
+      - name: Show directory structure
+        run: |
+          pwd
+          ls -la
+          find . -name "*.xcodeproj" -type d | head -5
+      
+      - name: Build project
+        run: |
+          if [ -f "AR3DScan.xcodeproj/project.pbxproj" ]; then
+            xcodebuild -project AR3DScan.xcodeproj \
+              -scheme AR3DScan \
+              -destination 'platform=iOS Simulator,name=iPhone 16 Pro' \
+              -sdk iphonesimulator \
+              clean build \
+              CODE_SIGN_IDENTITY="" \
+              CODE_SIGNING_REQUIRED=NO
+          elif [ -f "AR3DScan/AR3DScan.xcodeproj/project.pbxproj" ]; then
+            cd AR3DScan
+            xcodebuild -project AR3DScan.xcodeproj \
+              -scheme AR3DScan \
+              -destination 'platform=iOS Simulator,name=iPhone 16 Pro' \
+              -sdk iphonesimulator \
+              clean build \
+              CODE_SIGN_IDENTITY="" \
+              CODE_SIGNING_REQUIRED=NO
+          elif [ -f "AR3DScan/AR3DScan/AR3DScan.xcodeproj/project.pbxproj" ]; then
+            cd AR3DScan/AR3DScan
+            xcodebuild -project AR3DScan.xcodeproj \
+              -scheme AR3DScan \
+              -destination 'platform=iOS Simulator,name=iPhone 16 Pro' \
+              -sdk iphonesimulator \
+              clean build \
+              CODE_SIGN_IDENTITY="" \
+              CODE_SIGNING_REQUIRED=NO
+          else
+            echo "Error: Could not find .xcodeproj file"
+            find . -name "*.xcodeproj" -type d
+            exit 1
+          fi
+      
+      - name: Archive build artifacts
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-artifacts
+          path: |
+            AR3DScan/**/build/Build/Products/Debug-iphonesimulator/AR3DScan.app
+            **/build/Build/Products/Debug-iphonesimulator/AR3DScan.app
+          retention-days: 7
