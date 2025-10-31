@@ -59,7 +59,7 @@
 				FF0000000000000000000006 /* Assets.xcassets */,
 				FF0000000000000000000012 /* Preview Content */,
 			);
-			path = AR3DScan;
+			path = .;
 			sourceTree = "<group>";
 		};
 		FF0000000000000000000012 /* Preview Content */ = {
