@@ -1,0 +1,76 @@
+name: Build iOS App for Real Device
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build-device:
+    name: Build AR3DScan for iPhone
+    runs-on: macos-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Setup Xcode
+        uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: 'latest-stable'
+      
+      - name: Build for iOS Device
+        run: |
+          cd AR3DScan/AR3DScan
+          mkdir -p build
+          
+          # Build pour un vrai iPhone (pas simulateur)
+          xcodebuild -project AR3DScan.xcodeproj \
+            -scheme AR3DScan \
+            -sdk iphoneos \
+            -configuration Debug \
+            -derivedDataPath ./build \
+            CODE_SIGN_IDENTITY="" \
+            CODE_SIGNING_REQUIRED=NO \
+            CODE_SIGNING_ALLOWED=NO \
+            clean build
+      
+      - name: Create IPA file
+        if: success()
+        run: |
+          cd AR3DScan/AR3DScan
+          
+          # Chercher le .app compilé
+          APP_PATH=""
+          if [ -d "build/Build/Products/Debug-iphoneos/AR3DScan.app" ]; then
+            APP_PATH="build/Build/Products/Debug-iphoneos/AR3DScan.app"
+          else
+            APP_PATH=$(find ~/Library/Developer/Xcode/DerivedData -name "AR3DScan.app" -type d 2>/dev/null | grep -i "Debug-iphoneos" | head -1)
+          fi
+          
+          if [ -z "$APP_PATH" ]; then
+            echo "ERROR: AR3DScan.app not found!"
+            exit 1
+          fi
+          
+          echo "Found app at: $APP_PATH"
+          
+          # Créer un répertoire Payload pour l'IPA
+          mkdir -p ./artifacts/Payload
+          cp -R "$APP_PATH" ./artifacts/Payload/AR3DScan.app
+          
+          # Créer l'IPA
+          cd artifacts
+          zip -r AR3DScan.ipa Payload/
+          cd ..
+          
+          echo "IPA created at: $(pwd)/artifacts/AR3DScan.ipa"
+          ls -lh ./artifacts/
+      
+      - name: Archive IPA artifact
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ios-device-build
+          path: AR3DScan/AR3DScan/artifacts/AR3DScan.ipa
+          if-no-files-found: error
+          retention-days: 30
+
